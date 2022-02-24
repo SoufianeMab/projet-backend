@@ -9,3 +9,56 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Utilisateur {
+  id       Int       @id @default(autoincrement())
+  nom      String
+  email    String    @unique
+  password String
+  role     Role      @default(AUTHOR)
+  articles Article[]
+
+  createdAt   DateTime @default(now())
+  lastupdated DateTime @updatedAt
+}
+
+model Article {
+  id           Int           @id @default(autoincrement())
+  title        String        @db.VarChar(255)
+  contenu      String?
+  image        String?
+  published    Boolean       @default(false)
+  author       Utilisateur   @relation(fields: [authorId], references: [id])
+  authorId     Int
+  categories   Categorie[]   @relation(references: [id])
+  Commentaires Commentaire[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  //@@unique([authorId, title])
+}
+
+model Categorie {
+  id       Int       @id @default(autoincrement())
+  nom      String
+  articles Article[] @relation(references: [id])
+
+  createdAt   DateTime @default(now())
+  lastupdated DateTime @updatedAt
+}
+
+model Commentaire {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  contenu   String
+  article   Article? @relation(fields: [articleId], references: [id])
+  articleId Int?
+
+  createdAt   DateTime @default(now())
+  lastupdated DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  AUTHOR
+}
