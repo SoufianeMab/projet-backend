@@ -1,0 +1,28 @@
+get http://localhost:3000/users?take=10&skip=0
+
+######
+get http://localhost:3000/users/3
+
+######
+post http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "nom": "Reda",
+  "email": "Reda@gmail.com",
+  "password": "Reda"
+}
+
+########
+PATCH http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "id": 3,
+  "nom": "Redaaa",
+  "email": "Redaaa@gmail.com",
+  "password": "Redaaa"
+}
+
+#######
+DELETE http://localhost:3000/users/4

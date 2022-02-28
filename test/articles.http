@@ -1,1 +1,1 @@
-get http://localhost:3000/users
+get http://localhost:3000/articles?take=10&skip=0
