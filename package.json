@@ -13,7 +13,11 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.15"
   },
+  "prisma": {
+    "seed": "node ./seeds/seed.js"
+  },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.7",
     "prisma": "^3.10.0"
   }
 }
